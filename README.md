@@ -1,5 +1,5 @@
 # ReadShare - A simple book sharing platform
 
 #### tests
-`npm test -- --watch`
+`npm test -- --watch`<br>
 `npm test -- --coverage` 
