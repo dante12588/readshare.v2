@@ -18,6 +18,14 @@ app.get('/', hand.home);
 app.get('/about', hand.about);
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`);
+// });
+
+if(require.main === module){
+    app.listen(port, () => {
+        console.log(`Example app listening at http://localhost:${port}`);
+    });
+} else {
+    module.exports = app;
+}
