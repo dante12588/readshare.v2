@@ -13,6 +13,25 @@ const addNewUser = (username, email, password) => {
     })
 }
 
+// get user by username
+const getUserByUsername = (username) => {
+    return User.findOne({
+        where: {
+            username: username
+        }
+    })
+}
+
+const getUserByMail = (email) => {
+    return User.findOne({
+        where: {
+            email: email
+        }
+    })
+}
+
 module.exports = {
-    addNewUser
+    addNewUser,
+    getUserByUsername,
+    getUserByMail
 }

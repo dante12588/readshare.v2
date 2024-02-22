@@ -1,21 +1,13 @@
 const router = require('express').Router();
 const User = require('../Models/User');
-// const User = require('../Models/User');
-// const Book = require('../Models/Book');
-// const Models = require('../Models/Models');
-
-// Book.belongsTo(User, {foreignKey: 'userId'});
-// User.hasMany(Book, {foreignKey: 'userId'});
-
-// User.createUser('ni2ck', 'ma2il', 'ha2slo');
-
 
 // register new user
-router.post('/users/register', (req, res) => {
-    const username = req.body.username,
-          email = req.body.email,
-          password = req.body.password,
-          message = {};
+router.post('/users/register', async (req, res) => {
+
+    const username = req.body.username ? req.body.username : '',
+    email = req.body.email ? req.body.email : '',
+    password = req.body.password,
+    message = {};
 
     if(!username){
         message.err_username = 'Username is required';
@@ -30,20 +22,39 @@ router.post('/users/register', (req, res) => {
         message.status = 'error';
     }
 
-    if(message.status === 'error'){
-        req.session.messages = message;
-        return res.redirect(303, '/register');
-    }
+    User.getUserByUsername(username)
+        .then(user => {
+            if(user){
+                message.err_password = 'Username already exists';
+                message.status = 'error';
+                req.session.messages = message;
+                // return res.redirect(303, '/register');
+            }
 
-    User.addNewUser(username, email, password)
-    .then(() =>{
-        console.log("\nDodano użytkownika do bazy danych\n");
-    })
-    .catch(() => {
-        console.log("\nNie udało się dodać użytkownika do bazy danych\n");
-    });
+            User.getUserByMail(email)
+                .then(user => {
+                    if(user){
+                        message.err_email = 'Email already exists';
+                        message.status = 'error';
+                        req.session.messages = message;
+                        return res.redirect(303, '/register');
+                    }
 
-    return res.redirect(303, '/register');
+                    if(message.status === 'error'){
+                        req.session.messages = message;
+                        return res.redirect(303, '/register');
+                    }
+
+                    User.addNewUser(username, email, password)
+                        .then(user => {
+                            console.log('User added' + user.username);
+                            return res.redirect(303, '/register');
+                        })
+                })
+        })
+        .catch(err => {
+            console.log(err);
+        });
 
 });
 
