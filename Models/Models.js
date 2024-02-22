@@ -49,8 +49,8 @@ Book.belongsTo(User, {
     foreignKey: 'userId', // klucz obcy w tabeli Book
   });
   
-  // Użytkownik ma wiele książek
-  User.hasMany(Book, {
+// Użytkownik ma wiele książek
+ User.hasMany(Book, {
     foreignKey: 'userId', // klucz obcy w tabeli Book
   });
 
@@ -61,13 +61,13 @@ Book.belongsTo(User, {
 //     password: 'adxmin'
 //   });
 
-  Book.create({
-    userId: 3,
-    title: 'Książka',
-    author: 'Autor',
-    description: 'Opis',
-    isOwnedByOwner: true
-  });
+  // Book.create({
+  //   userId: 3,
+  //   title: 'Książka',
+  //   author: 'Autor',
+  //   description: 'Opis',
+  //   isOwnedByOwner: true
+  // });
 
 
 //   Book.sync({ force: true }).then(() => {
@@ -75,3 +75,8 @@ Book.belongsTo(User, {
 //   });
 
 // sequelize.sync({ force: true });
+
+module.exports = {
+    User,
+    Book
+}

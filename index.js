@@ -4,6 +4,7 @@ const hand = require('./lib/handlers');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 // const flash = require('connect-flash');
 
 // configure flash middleware
@@ -41,6 +42,7 @@ const port = 4000;
 app.use(morgan('dev'));
 
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 // session middleware
 app.use(session({
@@ -75,6 +77,7 @@ app.get('/about', hand.about);
 app.use((req, res, next) => {
   res.locals.messages = req.session.messages;
   delete req.session.messages;
+  console.log( res.locals.messages );
   next();
 });
 

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../Models/User');
 // const User = require('../Models/User');
 // const Book = require('../Models/Book');
 // const Models = require('../Models/Models');
@@ -11,15 +12,43 @@ const router = require('express').Router();
 
 // register new user
 router.post('/users/register', (req, res) => {
-    req.session.messages = {
-        type: 'success',
-        intro: 'Thank you!',
-        message: 'You have now'
-    };
-    res.redirect(303, '/register');
+    const username = req.body.username,
+          email = req.body.email,
+          password = req.body.password,
+          message = {};
+
+    if(!username){
+        message.err_username = 'Username is required';
+        message.status = 'error';
+    }
+    if(!email){
+        message.err_email = 'Email is required';
+        message.status = 'error';
+    }
+    if(!password){
+        message.err_password = 'Password is required';
+        message.status = 'error';
+    }
+
+    if(message.status === 'error'){
+        req.session.messages = message;
+        return res.redirect(303, '/register');
+    }
+
+    User.addNewUser(username, email, password)
+    .then(() =>{
+        console.log("\nDodano użytkownika do bazy danych\n");
+    })
+    .catch(() => {
+        console.log("\nNie udało się dodać użytkownika do bazy danych\n");
+    });
+
+    return res.redirect(303, '/register');
+
 });
 
 router.get('/register', (req, res) => {
+    console.log(req.locals);
     res.render('register');
 });
 
