@@ -43,6 +43,7 @@ app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 // session middleware
 app.use(session({

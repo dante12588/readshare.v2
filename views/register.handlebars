@@ -1,1 +1,17 @@
-{{!-- {{messages.status}} --}}
+<h1>Strona do rejestracji</h1>
+
+<form action="/users/register" method="post">
+    <div> 
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+    </div>
+    <div>
+        <label for="password">Hasło</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <button type="submit">Zarejestruj</button>
+</form>

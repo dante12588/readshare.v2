@@ -4,6 +4,8 @@ const User = require('../Models/User');
 // register new user
 router.post('/users/register', async (req, res) => {
 
+    console.log(req.body);
+
     const username = req.body.username ? req.body.username : '',
     email = req.body.email ? req.body.email : '',
     password = req.body.password,
@@ -48,7 +50,7 @@ router.post('/users/register', async (req, res) => {
                     User.addNewUser(username, email, password)
                         .then(user => {
                             console.log('User added' + user.username);
-                            return res.redirect(303, '/register');
+                            return res.redirect(303, '/login');
                         })
                 })
         })
@@ -56,6 +58,9 @@ router.post('/users/register', async (req, res) => {
             console.log(err);
         });
 
+});
+router.get('/login', (req, res) => {
+    res.render('login');
 });
 
 router.get('/register', (req, res) => {
