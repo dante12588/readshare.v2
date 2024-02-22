@@ -109,6 +109,9 @@ router.post('/users/login', (req, res) => {
 
             if(isCorrectPassword){
                 req.session.user = user;
+                message.success = 'You have been logged in successfully';
+                message.status = 'success';
+                req.session.messages = message;
                 return res.redirect(303, '/');
             }else{
                 message.err_password = 'Password is incorrect';

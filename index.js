@@ -5,36 +5,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-// const flash = require('connect-flash');
-
-// configure flash middleware
-// app.use(flash());
-
-// // Ustawienie lokalnych zmiennych dla wiadomości flash
-// app.use((req, res, next) => {
-//     res.locals.messages = req.flash();
-//     next();
-//   });
-
-// const winston = require('winston');
-
-// const logger = winston.createLogger({
-//   level: 'info',
-//   format: winston.format.json(),
-//   transports: [
-//     //
-//     // - Write all logs with level `info` and below to `combined.log` 
-//     // - Write all logs with level `error` and below to `error.log`.
-//     //
-//     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-//     new winston.transports.File({ filename: 'combined.log' })
-//   ]
-// });
-
-// logger.add(new winston.transports.Console({
-//     format: winston.format.simple()
-// }));
-
+const Controllers = require('./Controllers/index');
 
 const app = express();
 const port = 4000;
@@ -52,13 +23,14 @@ app.use(session({
     saveUninitialized: false
   }));
 
-  // configure flash middleware
-// app.use(flash());
+// middleware to add messages to res.locals
+  app.use((req, res, next) => {
+    res.locals.messages = req.session.messages;
+    delete req.session.messages;
+    console.log( res.locals.messages );
+    next();
+  });
 
-// Ustawienie lokalnych zmiennych dla wiadomości flash
-
-
-const Controllers = require('./Controllers/index');
 
 
 // Set handlebars as the template engine
@@ -71,16 +43,6 @@ app.set('view engine', 'handlebars');
 app.get('/', hand.home);
 
 app.get('/about', hand.about);
-
-
-
-
-app.use((req, res, next) => {
-  res.locals.messages = req.session.messages;
-  delete req.session.messages;
-  console.log( res.locals.messages );
-  next();
-});
 
 app.use('/', Controllers);
 
