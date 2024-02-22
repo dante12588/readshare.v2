@@ -4,24 +4,24 @@ const hand = require('./lib/handlers');
 const morgan = require('morgan');
 const Controllers = require('./Controllers/index');
 
-const winston = require('winston');
+// const winston = require('winston');
 
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    //
-    // - Write all logs with level `info` and below to `combined.log` 
-    // - Write all logs with level `error` and below to `error.log`.
-    //
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' })
-  ]
-});
+// const logger = winston.createLogger({
+//   level: 'info',
+//   format: winston.format.json(),
+//   transports: [
+//     //
+//     // - Write all logs with level `info` and below to `combined.log` 
+//     // - Write all logs with level `error` and below to `error.log`.
+//     //
+//     new winston.transports.File({ filename: 'error.log', level: 'error' }),
+//     new winston.transports.File({ filename: 'combined.log' })
+//   ]
+// });
 
-logger.add(new winston.transports.Console({
-    format: winston.format.simple()
-}));
+// logger.add(new winston.transports.Console({
+//     format: winston.format.simple()
+// }));
 
 
 const app = express();

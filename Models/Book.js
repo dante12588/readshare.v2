@@ -1,32 +1,38 @@
 // const { DataTypes } = require('sequelize');
 // const sequelize = require('./config');
 
-// const User = sequelize.define('User', {
+// const Book = sequelize.define('Book', {
 //     // Definiowanie atrybutów modelu
-//     username: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//       unique: true
+//     userId: {
+//       type: DataTypes.INTEGER,
+//       allowNull: false
 //     },
-//     email: {
+//     title: {
 //       type: DataTypes.STRING,
-//       allowNull: false,
-//       unique: true
+//       allowNull: false
 //     },
-//     password: {
+//     author: {
 //       type: DataTypes.STRING,
+//       allowNull: false
+//     },
+//     description: {
+//       type: DataTypes.STRING,
+//       allowNull: false
+//     },
+//     isOwnedByOwner: {
+//       type: DataTypes.BOOLEAN,
 //       allowNull: false
 //     }
 //   });
+
 
 //   // Opcja { force: true } w sync spowoduje usunięcie tabeli, jeśli już istnieje, a następnie jej ponowne utworzenie
 // //   { alter: true }: Pozwala Sequelize na bezpieczne wprowadzanie zmian w istniejącej tabeli, tak aby pasowała do modelu, bez konieczności usuwania danych.
 // // { match: /regex/ }: Pozwala na synchronizację tylko tych baz danych, których nazwy pasują do podanego wyrażenia regularnego, zwiększając bezpieczeństwo.
 
-//   User.sync({ force: true }).then(() => {
+//   Book.sync({ force: true }).then(() => {
 //     console.log('Tabela synchronizowana');
 //   });
-
 
 // // Tworzenie nowego użytkownika
 // // const createUser = async (username, email, password) => {

@@ -1,10 +1,8 @@
 const { Sequelize } = require('sequelize');
-const logger = require('winston');
 
 const sequelize = new Sequelize('readshare2', 'root', 'qwer789Qwer', {
   host: 'localhost',
   dialect: 'mysql', // zmień na 'postgres', 'sqlite', 'mariadb', lub 'mssql' w zależności od twojej bazy danych
-  logging: msg => logger.debug(msg)
 });
 
 try{
