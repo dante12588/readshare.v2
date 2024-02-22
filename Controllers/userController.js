@@ -24,10 +24,15 @@ router.post('/users/register', async (req, res) => {
         message.status = 'error';
     }
 
+    // if(message.status === 'error'){
+    //     req.session.messages = message;
+    //     return res.redirect(303, '/register');
+    // }
+
     User.getUserByUsername(username)
         .then(user => {
             if(user){
-                message.err_password = 'Username already exists';
+                message.err_username = 'Username already exists';
                 message.status = 'error';
                 req.session.messages = message;
                 // return res.redirect(303, '/register');
@@ -49,7 +54,10 @@ router.post('/users/register', async (req, res) => {
 
                     User.addNewUser(username, email, password)
                         .then(user => {
-                            console.log('User added' + user.username);
+                            console.log('User ' + user.username + ' has been registered');
+                            message.success = "You have been registered successfully";
+                            message.status = 'success';
+                            req.session.messages = message;
                             return res.redirect(303, '/login');
                         })
                 })
@@ -70,7 +78,48 @@ router.get('/register', (req, res) => {
 
 // login user
 router.post('/users/login', (req, res) => {
-    res.send('login');
+    const username = req.body.username ? req.body.username : '',
+    password = req.body.password ? req.body.password : '';
+
+    const message = {};
+
+    if(!username){
+        message.err_username = 'Username is required';
+        message.status = 'error';
+    }
+    if(!password){
+        message.err_password = 'Password is required';
+        message.status = 'error';
+    }
+
+    if(message.status === 'error'){
+        req.session.messages = message;
+        return res.redirect(303, '/login');
+    }
+
+    User.getUserByUsername(username)
+        .then(user => {
+            if(!user){
+                message.err_username = 'Username does not exist';
+                message.status = 'error';
+                req.session.messages = message;
+                return res.redirect(303, '/login');
+            }
+            const isCorrectPassword = User.comparePassword(password, user.password);
+
+            if(isCorrectPassword){
+                req.session.user = user;
+                return res.redirect(303, '/');
+            }else{
+                message.err_password = 'Password is incorrect';
+                message.status = 'error';
+                req.session.messages = message;
+                return res.redirect(303, '/login');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
 });
 
 // get user by id

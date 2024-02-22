@@ -1,4 +1,6 @@
 const { User } = require('./Models');
+const { hash } = require('../lib/hash');
+const bcrypt = require('bcrypt');
 
 // add new user to database
 const addNewUser = (username, email, password) => {
@@ -6,7 +8,7 @@ const addNewUser = (username, email, password) => {
         User.create({
             username: username,
             email: email,
-            password: password
+            password: hash(password)
         })
         .then(user => resolve(user))
         .catch(err => reject(err));
@@ -30,8 +32,14 @@ const getUserByMail = (email) => {
     })
 }
 
+const comparePassword = (password, hash) => {
+    const result = bcrypt.compareSync(password, hash);
+    return result;
+};
+
 module.exports = {
     addNewUser,
     getUserByUsername,
-    getUserByMail
+    getUserByMail,
+    comparePassword
 }

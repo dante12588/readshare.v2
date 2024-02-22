@@ -54,22 +54,6 @@ Book.belongsTo(User, {
     foreignKey: 'userId', // klucz obcy w tabeli Book
   });
 
-
-// User.create({
-//     username: 'adxmin',
-//     email: 'maixl',
-//     password: 'adxmin'
-//   });
-
-  // Book.create({
-  //   userId: 3,
-  //   title: 'Książka',
-  //   author: 'Autor',
-  //   description: 'Opis',
-  //   isOwnedByOwner: true
-  // });
-
-
 //   Book.sync({ force: true }).then(() => {
 //     console.log('Tabela synchronizowana');
 //   });
