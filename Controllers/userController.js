@@ -108,7 +108,7 @@ router.post('/users/login', (req, res) => {
             const isCorrectPassword = User.comparePassword(password, user.password);
 
             if(isCorrectPassword){
-                req.session.user = user;
+                req.session.user = user.username;
                 message.success = 'You have been logged in successfully';
                 message.status = 'success';
                 req.session.messages = message;
