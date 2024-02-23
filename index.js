@@ -1,6 +1,5 @@
 const express = require('express');
 const hbs  = require('express-handlebars');
-const hand = require('./lib/handlers');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -52,10 +51,6 @@ app.engine('handlebars', hbs.engine({
     defaultLayout: "main"
   }));
 app.set('view engine', 'handlebars');
-
-app.get('/', hand.home);
-
-app.get('/about', hand.about);
 
 app.use('/', Controllers);
 
