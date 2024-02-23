@@ -119,12 +119,36 @@ router.post('/users/login', (req, res) => {
 
 // get user by id
 router.get('/users/:userid', (req, res) => {
-    res.send('get user by id');
+    const userid = req.params.userid;
+    User.getUserById(userid)
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: 'Error',
+                error: err
+            });
+        });
 });
 
-// update user by id
+// update user password by id
 router.put('/users/:userid', (req, res) => {
-    res.send('update user by id');
+    const userid = req.params.userid;
+    const password = req.body.password;
+    console.log(userid, password);
+    
+    User.updateUserPasswordById(userid, password)
+        .then(() => {
+            return res.status(200).json({
+                message: 'Password has been updated'
+            });
+        })
+        .catch(() => {
+            return res.status(500).json({
+                message: 'Error'
+            });
+        });
 });
 
 // delete user by id

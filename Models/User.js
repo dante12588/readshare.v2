@@ -32,6 +32,24 @@ const getUserByMail = (email) => {
     })
 }
 
+const getUserById = (id) => {
+    return User.findOne({
+        where: {
+            id: id
+        }
+    })
+}
+
+const updateUserPasswordById = (userid, password) => {
+    return User.update({
+        password: hash(password)
+    }, {
+        where: {
+            id: userid
+        }
+    })
+};
+
 const comparePassword = (password, hash) => {
     const result = bcrypt.compareSync(password, hash);
     return result;
@@ -41,5 +59,7 @@ module.exports = {
     addNewUser,
     getUserByUsername,
     getUserByMail,
-    comparePassword
+    comparePassword,
+    getUserById,
+    updateUserPasswordById
 }
