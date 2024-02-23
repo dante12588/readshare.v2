@@ -43,8 +43,6 @@ app.use(session({
     next();
   });
 
-
-
 // Set handlebars as the template engine
 // hbs({defaultLayout: 'main'}) not working
 app.engine('handlebars', hbs.engine({

@@ -67,14 +67,6 @@ router.post('/users/register', async (req, res) => {
         });
 
 });
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-
-router.get('/register', (req, res) => {
-    console.log(req.locals);
-    res.render('register');
-});
 
 // login user
 router.post('/users/login', (req, res) => {
