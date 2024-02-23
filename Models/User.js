@@ -50,6 +50,14 @@ const updateUserPasswordById = (userid, password) => {
     })
 };
 
+const deleteUserById = (userid) => {
+    return User.destroy({
+        where: {
+            id: userid
+        }
+    })
+}
+
 const comparePassword = (password, hash) => {
     const result = bcrypt.compareSync(password, hash);
     return result;
@@ -61,5 +69,6 @@ module.exports = {
     getUserByMail,
     comparePassword,
     getUserById,
-    updateUserPasswordById
+    updateUserPasswordById,
+    deleteUserById
 }
