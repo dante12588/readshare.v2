@@ -5,7 +5,7 @@ router.post('/books/add', (req, res) => {
     const title = req.body.title,
         author = req.body.author,
         description = req.body.description,
-        userId = req.session.userId ? req.session.userId : 125,
+        userId = req.session.userId ? req.session.userId : 2,
         isOwnedByOwner = 1;
 
     Book.addBook(title, author, description, userId, isOwnedByOwner)
