@@ -69,6 +69,21 @@ const User = sequelize.define('User', {
     }
   });
 
+  const Message = sequelize.define('Message', {
+    senderId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    receiverId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
+
 // Książka należy do użytkownika
 Book.belongsTo(User, {
     foreignKey: 'userId', // klucz obcy w tabeli Book
@@ -95,14 +110,23 @@ BookRequest.belongsTo(Book, { as: 'RequesterBook', foreignKey: 'requesterBookId'
 Book.hasMany(BookRequest, { as: 'RequestsReceived', foreignKey: 'requestedBookId' });
 BookRequest.belongsTo(Book, { as: 'RequestedBook', foreignKey: 'requestedBookId' });
 
+User.hasMany(Message, { as: 'SentMessages', foreignKey: 'senderId' });
+Message.belongsTo(User, { as: 'Sender', foreignKey: 'senderId' });
+
+User.hasMany(Message, { as: 'ReceivedMessages', foreignKey: 'receiverId' });
+Message.belongsTo(User, { as: 'Receiver', foreignKey: 'receiverId' });
+
 //   Book.sync({ force: true }).then(() => {
 //     console.log('Tabela synchronizowana');
 //   });
 
-// sequelize.sync({ force: true });
+// force: true wszystko usuwa
+// alter jest bardizej delikate
+// sequelize.sync({ alter: true });
 
 module.exports = {
     User,
     Book,
-    BookRequest
+    BookRequest,
+    Message
 }
