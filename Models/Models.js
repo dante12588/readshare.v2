@@ -84,6 +84,34 @@ const User = sequelize.define('User', {
     }
   });
 
+  const BookExchange = sequelize.define('BookExchange', {
+    bookRequestId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    isCompleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
+    senderRating: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    receiverRating: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    senderComment: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    receiverComment: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
+  });
+
 // Książka należy do użytkownika
 Book.belongsTo(User, {
     foreignKey: 'userId', // klucz obcy w tabeli Book
@@ -116,6 +144,9 @@ Message.belongsTo(User, { as: 'Sender', foreignKey: 'senderId' });
 User.hasMany(Message, { as: 'ReceivedMessages', foreignKey: 'receiverId' });
 Message.belongsTo(User, { as: 'Receiver', foreignKey: 'receiverId' });
 
+BookRequest.hasOne(BookExchange, { foreignKey: 'bookRequestId' });
+BookExchange.belongsTo(BookRequest, { foreignKey: 'bookRequestId' });
+
 //   Book.sync({ force: true }).then(() => {
 //     console.log('Tabela synchronizowana');
 //   });
@@ -128,5 +159,6 @@ module.exports = {
     User,
     Book,
     BookRequest,
-    Message
+    Message,
+    BookExchange
 }
