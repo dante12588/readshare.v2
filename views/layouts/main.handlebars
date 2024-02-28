@@ -2,7 +2,86 @@
 <html>
   <head>
     <title>tytuł</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
+    <nav>
+                <div class="logo">
+                    <a href="/">
+                        <img src="images/logo-3.png" alt="">
+                    </a>
+                </div>
+                <div class="links menu-animation">
+                    <a href="/">Znajdz książkę</a>
+                    <a href="/ratings">Oceń książkę</a>
+                    <a href="/offerted">Oferty</a>
+                    <a href="/mybooks">Moje książki</a>
+                </div>
+                <div class="icons menu-animation">
+                    {{#if userName}}
+                        <a href="/addbook">+</a>
+                        <a href="/">K</a>
+                        
+                        <a href="/users/logout">W</a>
+                    {{else}}
+                        <a class="login" href="/login">Zaloguj się</a>
+                        <a class="login" href="/login">Zarejestruj się</a>
+                    {{/if}}
+                </div>
+            </nav>
+    <div class="hero-image">
+                <span class="hero-image__text"></span>
+                <span class="hero-image__line"></span>
+                <span class="hero-image__lamp1 hero-image__lamp"></span>
+                <span class="hero-image__lamp2 hero-image__lamp"></span>
+                <span class="hero-image__lamp3 hero-image__lamp"></span>
+                <span class="hero-image__lamp4 hero-image__lamp"></span>
+                <span class="hero-image__star"></span>
+                <span class="hero-image__btn1">Wymieniaj się książkami i coś tam</span>
+                <span class="hero-image__btn2"></span>
+                <span class="hero-image__btn3"></span>
+            </div>
     {{{body}}}
+      <footer>
+            Copyright © 2023 ReadShare. All Rights Reserved.
+        </footer>
+
+                <script>
+
+    // Dzielenie tekstu na pojedyncze znaki i dodanie ich do spana
+    $('nav .menu-animation a').each(function(){
+        const itemMenu = $(this).text() ;
+        $(this).empty();
+        for(ele of itemMenu ){
+            let = span = $('<span></span>').text(ele);
+            $(this).append(span);
+        }     
+    });
+
+    // Animacja po najechaniu na link
+    $('nav .menu-animation a').hover(function(){
+        console.log('działa');
+
+        $(this).find('span').each(function(index){
+            let element = $(this);
+            setTimeout(function(){
+                element.addClass('anime');
+            }, index * 30);
+            element.removeClass('anime');
+        });
+        
+    }, function(){
+        $(this).find('span').each(function(index){
+                let element = $(this);
+                element.removeClass('anime');
+            });
+    });
+
+
+</script>
+
   </body>
+
+
+

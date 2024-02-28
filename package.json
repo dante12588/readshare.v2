@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint index.js lib",
-    "start": "browser-sync start  --files './**/*' --proxy 'localhost:4000' & nodemon index.js"
+    "scss": "sass --watch src/styles.scss public/styles.css",
+    "start": "browser-sync start  --files './**/*' --proxy 'localhost:4000' & nodemon index.js & npm run scss"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "morgan": "^1.10.0",
     "portfinder": "^1.0.32",
     "puppeteer": "^22.0.0",
+    "sass": "^1.71.1",
     "winston": "^3.11.0"
   }
 }
