@@ -1,8 +1,7 @@
 # ReadShare - Aplikacja do dzielenia się książkami
 
 # API
-
-
+----------
 ## Zarządzanie Użytkownikami
 ### Rejestracja Nowego Użytkownika
 - **URL**: `/users/register`
