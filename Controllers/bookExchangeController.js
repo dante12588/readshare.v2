@@ -9,7 +9,7 @@ router.post('/book-exchanges/start', (req, res) => {
             res.status(201).json({message: 'Book exchange has been started'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
@@ -17,10 +17,10 @@ router.get('/book-exchanges/:exchangeid', (req, res) => {
     const exchangeid = req.params.exchangeid;
     BookExchange.getBookExchangesById(exchangeid)
         .then(bookExchange => {
-            res.json(bookExchange);
+            res.status(200).json(bookExchange);
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
@@ -31,7 +31,7 @@ router.put('/book-exchanges/:exchangeid/complete', (req, res) => {
             res.status(200).json({message: 'Book exchange has been completed'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
@@ -43,7 +43,7 @@ router.put('/book-exchanges/:exchangeid/update', (req, res) => {
             res.status(200).json({message: 'Book exchange has been updated'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 

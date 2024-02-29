@@ -14,27 +14,27 @@ router.post('/books/add', (req, res) => {
             res.status(201).json({message: 'Book has been added'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
 router.get('/books/all', (req, res) => {
     Book.getAllBooks()
         .then(books => {
-            res.json(books);
+            res.status(200).json(books);
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
 router.get('/books/:id', (req, res) => {
     Book.getBookById(req.params.id)
         .then(book => {
-            res.json(book);
+            res.status(200).json(book);
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
@@ -44,7 +44,7 @@ router.put('/books/:id', (req, res) => {
             res.status(204).json({message: 'Book has been updated'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
@@ -54,7 +54,7 @@ router.delete('/books/:id', (req, res) => {
             res.status(204).json({message: 'Book has been deleted'});
         })
         .catch(err => {
-            res.json({error: err});
+            res.status(400).json({error: err});
         })
 });
 
