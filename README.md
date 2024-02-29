@@ -50,3 +50,110 @@
 - **Odpowiedź Sukcesu**: `200 OK` z komunikatem sukcesu
 - **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
 - **Opis**: Usuwa użytkownika na podstawie ID użytkownika.
+
+## Zarządzanie Książkami
+
+### Dodawanie Książki
+- **URL**: `/books/add`
+- **Metoda**: `POST`
+- **Dane Wejściowe**:
+  - `title`: String (wymagane)
+  - `author`: String (wymagane)
+  - `description`: String (wymagane)
+  - `userId`: String (opcjonalne, domyślnie 2)
+  - `isOwnedByOwner`: Integer (opcjonalne, domyślnie 1)
+- **Odpowiedź Sukcesu**: `201 Created` z komunikatem o dodaniu książki
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Dodaje nową książkę do systemu.
+
+### Pobieranie Wszystkich Książek
+- **URL**: `/books/all`
+- **Metoda**: `GET`
+- **Odpowiedź Sukcesu**: `200 OK` z listą wszystkich książek
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Pobiera listę wszystkich książek dostępnych w systemie.
+
+### Pobieranie Książki po ID
+- **URL**: `/books/:id`
+- **Metoda**: `GET`
+- **Parametry URL**: `id` (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z danymi książki
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Pobiera szczegółowe informacje o książce na podstawie jej ID.
+
+### Aktualizacja Książki
+- **URL**: `/books/:id`
+- **Metoda**: `PUT`
+- **Parametry URL**: `id` (wymagane)
+- **Dane Wejściowe**: dowolne dane dotyczące książki
+- **Odpowiedź Sukcesu**: `204 No Content` z komunikatem o aktualizacji książki
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Aktualizuje dane książki na podstawie jej ID.
+
+### Usuwanie Książki
+- **URL**: `/books/:id`
+- **Metoda**: `DELETE`
+- **Parametry URL**: `id` (wymagane)
+- **Odpowiedź Sukcesu**: `204 No Content` z komunikatem o usunięciu książki
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Usuwa książkę z systemu na podstawie jej ID.
+
+
+## Zarządzanie Wiadomościami
+
+### Wysyłanie Wiadomości
+- **URL**: `/messages/send`
+- **Metoda**: `POST`
+- **Dane Wejściowe**:
+  - `senderId`: String (wymagane)
+  - `receiverId`: String (wymagane)
+  - `content`: String (wymagane)
+- **Odpowiedź Sukcesu**: `201 Created` z danymi wysłanej wiadomości
+- **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
+- **Opis**: Pozwala użytkownikowi na wysłanie wiadomości do innego użytkownika.
+
+### Pobieranie Wiadomości
+- **URL**: `/messages/:senderId/:receiverId`
+- **Metoda**: `GET`
+- **Parametry URL**:
+  - `senderId`: String (wymagane)
+  - `receiverId`: String (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z listą wiadomości
+- **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
+- **Opis**: Pobiera wszystkie wiadomości wymienione między dwoma użytkownikami.
+
+## Zarządzanie Wymianą Książek
+
+### Rozpoczęcie Wymiany Książek
+- **URL**: `/book-exchanges/start`
+- **Metoda**: `POST`
+- **Dane Wejściowe**:
+  - `bookRequestId`: String (wymagane)
+- **Odpowiedź Sukcesu**: `201 Created` z komunikatem o rozpoczęciu wymiany
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Inicjuje proces wymiany książek na podstawie żądania wymiany książki.
+
+### Pobieranie Informacji o Wymianie Książek
+- **URL**: `/book-exchanges/:exchangeid`
+- **Metoda**: `GET`
+- **Parametry URL**: `exchangeid` (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z danymi wymiany
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Pobiera szczegółowe informacje o konkretnej wymianie książek.
+
+### Zakończenie Wymiany Książek
+- **URL**: `/book-exchanges/:exchangeid/complete`
+- **Metoda**: `PUT`
+- **Parametry URL**: `exchangeid` (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z komunikatem o zakończeniu wymiany
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Oznacza wymianę książek jako zakończoną.
+
+### Aktualizacja Wymiany Książek
+- **URL**: `/book-exchanges/:exchangeid/update`
+- **Metoda**: `PUT`
+- **Parametry URL**: `exchangeid` (wymagane)
+- **Dane Wejściowe**: dowolne dane dotyczące wymiany
+- **Odpowiedź Sukcesu**: `200 OK` z komunikatem o aktualizacji wymiany
+- **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
+- **Opis**: Aktualizuje dane dotyczące określonej wymiany książek.
