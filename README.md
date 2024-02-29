@@ -50,7 +50,7 @@
 - **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
 - **Opis**: Usuwa użytkownika na podstawie ID użytkownika.
 
-
+----------
 ## Zarządzanie Książkami
 ### Dodawanie Książki
 - **URL**: `/books/add`
@@ -97,7 +97,7 @@
 - **Odpowiedź Błędu**: `400 Bad Request` z komunikatem błędu
 - **Opis**: Usuwa książkę z systemu na podstawie jej ID.
 
-
+----------
 ## Zarządzanie Wiadomościami
 ### Wysyłanie Wiadomości
 - **URL**: `/messages/send`
@@ -120,7 +120,7 @@
 - **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
 - **Opis**: Pobiera wszystkie wiadomości wymienione między dwoma użytkownikami.
 
-
+----------
 ## Zarządzanie Wymianą Książek
 ### Rozpoczęcie Wymiany Książek
 - **URL**: `/book-exchanges/start`
