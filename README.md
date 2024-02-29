@@ -1,106 +1,52 @@
 # ReadShare - Aplikacja do dzielenia się książkami
 
-# API Endpoints
+# API
 
-## Użytkownicy
+## Zarządzanie Użytkownikami
 
-### Zwracanie danych użytkownika
-- URL: `/users/:userid`
-- Metoda: GET
-- Opis: Zwraca dane użytkownika na podstawie podanego `userid`.
+### Rejestracja Nowego Użytkownika
+- **URL**: `/users/register`
+- **Metoda**: `POST`
+- **Dane Wejściowe**:
+  - `username`: String (wymagane)
+  - `email`: String (wymagane)
+  - `password`: String (wymagane)
+- **Odpowiedź Sukcesu**: Przekierowanie do `/login` z komunikatem sukcesu
+- **Odpowiedź Błędu**: Przekierowanie do `/register` z komunikatem(-ami) błędu
+- **Opis**: Rejestruje nowego użytkownika z użyciem nazwy użytkownika, adresu email i hasła.
 
-### Aktualizacja hasła użytkownika
-- URL: `/users/:userid`
-- Metoda: PUT
-- Dane wejściowe: `password`
-- Opis: Aktualizuje hasło użytkownika o podanym `userid`.
+### Logowanie Użytkownika
+- **URL**: `/users/login`
+- **Metoda**: `POST`
+- **Dane Wejściowe**:
+  - `username`: String (wymagane)
+  - `password`: String (wymagane)
+- **Odpowiedź Sukcesu**: Przekierowanie na stronę główną `/` z komunikatem sukcesu
+- **Odpowiedź Błędu**: Przekierowanie do `/login` z komunikatem(-ami) błędu
+- **Opis**: Uwierzytelnia użytkownika na podstawie nazwy użytkownika i hasła.
 
-### Usuwanie użytkownika
-- URL: `/users/:userid`
-- Metoda: DELETE
-- Opis: Usuwa użytkownika o podanym `userid`.
+### Pobieranie Użytkownika po ID
+- **URL**: `/users/:userid`
+- **Metoda**: `GET`
+- **Parametry URL**: `userid` (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z danymi użytkownika w formacie JSON
+- **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
+- **Opis**: Pobiera informacje o użytkowniku na podstawie ID użytkownika.
 
-## Książki
+### Aktualizacja Hasła Użytkownika po ID
+- **URL**: `/users/:userid`
+- **Metoda**: `PUT`
+- **Parametry URL**: `userid` (wymagane)
+- **Dane Wejściowe**:
+  - `password`: String (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z komunikatem sukcesu
+- **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
+- **Opis**: Aktualizuje hasło dla użytkownika zidentyfikowanego przez ID użytkownika.
 
-### Dodawanie książki
-- URL: `/books/add`
-- Metoda: POST
-- Dane wejściowe: `title`, `author`, `description`
-- Opis: Dodaje nową książkę do systemu.
-
-### Pobieranie wszystkich książek
-- URL: `/books/all`
-- Metoda: GET
-- Opis: Zwraca listę wszystkich książek.
-
-### Pobieranie książki po ID
-- URL: `/books/:id`
-- Metoda: GET
-- Opis: Zwraca szczegóły książki na podstawie `id`.
-
-### Aktualizacja książki
-- URL: `/books/:id`
-- Metoda: PUT
-- Dane wejściowe: Dane do aktualizacji.
-- Opis: Aktualizuje dane książki.
-
-### Usuwanie książki
-- URL: `/books/:id`
-- Metoda: DELETE
-- Opis: Usuwa książkę z systemu.
-
-## Wiadomości
-
-### Wysyłanie wiadomości
-- URL: `/messages/send`
-- Metoda: POST
-- Dane wejściowe: `senderId`, `receiverId`, `content`
-- Opis: Wysyła nową wiadomość od nadawcy do odbiorcy.
-
-### Pobieranie wiadomości między użytkownikami
-- URL: `/messages/:senderId/:receiverId`
-- Metoda: GET
-- Opis: Zwraca wszystkie wiadomości między dwoma użytkownikami.
-
-## Żądania wymiany książek
-
-### Dodawanie żądania wymiany książek
-- URL: `/book-requests/add`
-- Metoda: POST
-- Dane wejściowe: `requesterId`, `requestedUserId`, `requesterBookId`, `requestedBookId`
-- Opis: Dodaje nowe żądanie wymiany książek.
-
-### Pobieranie wszystkich żądań wymiany książek
-- URL: `/book-requests/all`
-- Metoda: GET
-- Opis: Zwraca wszystkie żądania wymiany książek.
-
-### Aktualizacja żądania wymiany książek
-- URL: `/book-requests/update`
-- Metoda: PUT
-- Dane wejściowe: `id`, `status`
-- Opis: Aktualizuje status żądania wymiany książek.
-
-## Wymiany książek
-
-### Rozpoczynanie wymiany książek
-- URL: `/book-exchanges/start`
-- Metoda: POST
-- Dane wejściowe: `bookRequestId`
-- Opis: Rozpoczyna proces wymiany książek na podstawie żądania.
-
-### Pobieranie wymiany książek po ID
-- URL: `/book-exchanges/:exchangeid`
-- Metoda: GET
-- Opis: Zwraca szczegóły wymiany książek na podstawie `exchangeid`.
-
-### Zakończenie wymiany książek
-- URL: `/book-exchanges/:exchangeid/complete`
-- Metoda: PUT
-- Opis: Oznacza wymianę książek jako zakończoną.
-
-### Aktualizacja wymiany książek
-- URL: `/book-exchanges/:exchangeid/update`
-- Metoda: PUT
-- Dane wejściowe: Dane do aktualizacji.
-- Opis: Aktualizuje dane wymiany książek.
+### Usuwanie Użytkownika po ID
+- **URL**: `/users/:userid`
+- **Metoda**: `DELETE`
+- **Parametry URL**: `userid` (wymagane)
+- **Odpowiedź Sukcesu**: `200 OK` z komunikatem sukcesu
+- **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
+- **Opis**: Usuwa użytkownika na podstawie ID użytkownika.
