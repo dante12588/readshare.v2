@@ -2,8 +2,8 @@
 
 # API
 
-## Zarządzanie Użytkownikami
 
+## Zarządzanie Użytkownikami
 ### Rejestracja Nowego Użytkownika
 - **URL**: `/users/register`
 - **Metoda**: `POST`
@@ -51,8 +51,8 @@
 - **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
 - **Opis**: Usuwa użytkownika na podstawie ID użytkownika.
 
-## Zarządzanie Książkami
 
+## Zarządzanie Książkami
 ### Dodawanie Książki
 - **URL**: `/books/add`
 - **Metoda**: `POST`
@@ -100,7 +100,6 @@
 
 
 ## Zarządzanie Wiadomościami
-
 ### Wysyłanie Wiadomości
 - **URL**: `/messages/send`
 - **Metoda**: `POST`
@@ -122,8 +121,8 @@
 - **Odpowiedź Błędu**: `500 Internal Server Error` z komunikatem błędu
 - **Opis**: Pobiera wszystkie wiadomości wymienione między dwoma użytkownikami.
 
-## Zarządzanie Wymianą Książek
 
+## Zarządzanie Wymianą Książek
 ### Rozpoczęcie Wymiany Książek
 - **URL**: `/book-exchanges/start`
 - **Metoda**: `POST`
